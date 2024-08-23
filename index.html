@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Document</title>
+  </head>
+  <style>
+    .boxes {
+      height: 200px;
+      width: 600px;
+      background-color: blueviolet;
+      margin: auto;
+      text-align: center;
+    }
+
+    .content {
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .box {
+      height: 40px;
+      width: 100px;
+      background-color: black;
+      color: white;
+      margin: 10px;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+    .box2 {
+      height: 40px;
+      width: 100px;
+      background-color: bisque;
+      margin: 10px;
+      display: flex;
+      text-align: center;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .outer {
+      display: flex;
+      margin-left: 115px;
+      margin-top: 10px;
+    }
+  </style>
+  <body>
+    <div class="content">
+      <div class="space"style="margin-top: 100px;"></div>
+      <h1 class="winner">Let's Play Hide and Seek</h1>
+      <div class="boxes">
+        <div class="outer">
+          <div class="box one"></div>
+          <div class="box two"></div>
+          <div class="box three"></div>
+        </div>
+        <div class="outer">
+          <div class="box four"></div>
+          <div class="box five"></div>
+          <div class="box six"></div>
+        </div>
+        <div class="outer">
+          <div class="box seven"></div>
+          <div class="box eight"></div>
+          <div class="box nine"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const changeText = document.querySelectorAll(".box");
+    const text = ["X", "0"];
+    let index = 0;
+    let gameOver = false;
+
+    changeText.forEach((element) => {
+      element.addEventListener("click", function handleclick() {
+        if (gameOver) return;
+        element.textContent = text[index % 2];
+        index++;
+
+        if (element.textContent === "X") {
+          element.style.backgroundColor = "red";
+          element.removeEventListener("click", handleclick);
+          const one = document.querySelector(".one");
+          const two = document.querySelector(".two");
+          const three = document.querySelector(".three");
+          const four = document.querySelector(".four");
+          const five = document.querySelector(".five");
+          const six = document.querySelector(".six");
+          const seven = document.querySelector(".seven");
+          const eight = document.querySelector(".eight");
+          const nine = document.querySelector(".nine");
+          if (
+            (one.textContent === "X" &&
+              two.textContent === "X" &&
+              three.textContent === "X") ||
+            (one.textContent === "X" &&
+              four.textContent === "X" &&
+              seven.textContent === "X") ||
+            (one.textContent === "X" &&
+              five.textContent === "X" &&
+              nine.textContent === "X") ||
+            (two.textContent === "X" &&
+              five.textContent === "X" &&
+              eight.textContent === "X") ||
+            (three.textContent === "X" &&
+              six.textContent === "X" &&
+              nine.textContent === "X") ||
+            (four.textContent === "X" &&
+              five.textContent === "X" &&
+              six.textContent === "X") ||
+            (three.textContent === "X" &&
+              five.textContent === "X" &&
+              seven.textContent === "X") ||
+            (
+              three.textContent === "X" &&
+              six.textContent === "X" &&
+              nine.textContent === "X"
+            )(
+              seven.textContent === "X" &&
+                eight.textContent === "X" &&
+                nine.textContent === "X"
+            )
+            
+          )
+        
+           
+          {
+            gameOver = true;
+            if ((element.style.backgroundColor = "red")) {
+              const timeOut = setTimeout(myAlert , 1000)
+              function myAlert(){
+                document.querySelector(".winner").innerHTML = "X wins the game"
+               const timeOut = setTimeout(secondAlert , 1200)
+                function secondAlert(){
+                  alert("Would you like to restart the game?")
+                  location.reload()
+                }
+               
+              }
+             
+            
+            }
+          
+          }
+          
+         
+        } 
+        else {
+          element.style.backgroundColor = "green";
+          element.removeEventListener("click", handleclick);
+
+          const one = document.querySelector(".one");
+          const two = document.querySelector(".two");
+          const three = document.querySelector(".three");
+          const four = document.querySelector(".four");
+          const five = document.querySelector(".five");
+          const six = document.querySelector(".six");
+          const seven = document.querySelector(".seven");
+          const eight = document.querySelector(".eight");
+          const nine = document.querySelector(".nine");
+
+          if (
+            (one.textContent === "0" &&
+              two.textContent === "0" &&
+              three.textContent === "0") ||
+            (one.textContent === "0" &&
+              four.textContent === "0" &&
+              seven.textContent === "0") ||
+            (one.textContent === "0" &&
+              five.textContent === "0" &&
+              nine.textContent === "0") ||
+            (two.textContent === "0" &&
+              five.textContent === "0" &&
+              eight.textContent === "0") ||
+            (three.textContent === "0" &&
+              six.textContent === "0" &&
+              nine.textContent === "0") ||
+            (four.textContent === "0" &&
+              five.textContent === "0" &&
+              six.textContent === "0") ||
+            (three.textContent === "0" &&
+              five.textContent === "0" &&
+              seven.textContent === "0") ||
+            (
+              three.textContent === "0" &&
+              six.textContent === "0" &&
+              nine.textContent === "0"
+            )(
+              seven.textContent === "0" &&
+                eight.textContent === "0" &&
+                nine.textContent === "0"
+            )
+          ) 
+          {
+          
+            gameOver = true;
+            if(element.style.backgroundColor = "green"){
+              const timeOut = setTimeout(mySecondAlert , 1000)
+
+              function mySecondAlert(){
+
+                document.querySelector(".winner").innerHTML = "0 wins the game"
+                const timeOut = setTimeout(secondAlert , 1200)
+                function secondAlert(){
+                  alert("Would you like to restart the game?")
+                  location.reload()
+                }
+              }
+            }
+          }
+        
+        }
+      });
+    }
+    );
+  </script>
+</html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Document</title>
+
+</head>
+
+<!-- ---------------------------------CSS OF THE CODE---------------------------------- -->
+<style>
+    .data{
+        width: 100%;
+        margin-top:100px;
+        text-align: center;
+    }
+    .data button{
+        width: 100px;
+    height: 40px;
+    background: aliceblue;
+    }
+</style>
+<!-- ----------------------------HERE BEGINS THE FORM----------------------------- -->
+<body>
+    <div class="data">
+      <form onsubmit=" displayData();return false;" class="dataEntry" style="width: 850px; margin: auto; margin-bottom: 20px; background-color: cadetblue; margin-top: 30px; padding: 50px; border-radius: 30px; display: none;">
+
+            <div class="row mb-3">
+              <label for="inputEmail3" class="col-sm-2 col-form-label">Name:</label>
+              <div class="col-sm-10">
+                <input type="text" class="form-control" id="name"oninput="titleCase()">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-sm-2 col-form-label">Maths:</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="maths">
+              </div>
+            </div>
+            
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-sm-2 col-form-label">Hindi:</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="hindi">
+              </div>
+            </div>
+           
+            <div class="row mb-3">
+              <label for="inputPassword3" class="col-sm-2 col-form-label">English:</label>
+              <div class="col-sm-10">
+                <input type="number" class="form-control" id="english">
+              </div>
+            </div>
+         
+           
+            <div class="errorMessage"style="color:red; margin-bottom:10px;"></div>
+            <button type="submit"onclick="return validateForm() && myData() ">Submit</button>
+            <button type="reset"class="resetButton">Reset</button>
+           
+          </form>
+
+          <!-- --------------------------------HERE STARTS THE TABLE---------------------------- -->
+          <div class="TableButton" style="display: none;padding: 20px;">
+          <button type="button" class="btn btn-outline-secondary"id="topper"onclick="filterTopper()">Topa</button>
+          <button type="button" class="btn btn-outline-secondary"id="failure"onclick="filterLoser()">Faila</button>
+          <button type="button" class="btn btn-outline-secondary"id="noFilter"style="display:none;"onclick=" RemoveFilter()">Reset</button>
+        </div>
+          <table class="tableBody"id="dataTable"style= "display: none;width: 100%;
+          background: antiquewhite;">
+       
+            <thead>
+              <tr>
+                <th scope="col">S No.</th>
+                <th scope="col">Name</th>
+                <th scope="col">Maths</th>
+                <th scope="col">Hindi</th>
+                <th scope="col">English</th>
+                <th scope="col"id="grade">Grade</th>
+              </tr>
+            </thead>
+        
+          </table>
+        <div class="dataEmpty"style="font-size:50px">NO DATA</div>
+    <button class="addData" onclick="myForm()">ADD DATA</button>
+    </div>
+                               <!-- -------------THE JAVASCRIPT--------------- -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script>
+
+      // ------------------------------------ADD DATA -------------------------------
+        function myForm(){
+          let filter = document.querySelector(".TableButton")
+            let x = document.querySelector(".dataEntry");
+            let y = document.querySelector(".addData")
+            let z = document.querySelector(".tableBody")
+            let nodata = document.querySelector(".dataEmpty")
+           
+            nodata.style.display = "none"
+            if (x.style.display === "none") {
+                x.style.display = "block";
+                y.style.display="none"
+                z.style.display="none"
+                filter.style.display="none"
+              
+                x.reset();
+            } else {
+                x.style.display = "none";
+                z.style.display = "none"
+            }
+            
+    }  
+
+
+        function myData(){
+
+          function functionOne(){
+            let filter = document.querySelector(".TableButton")
+          let x = document.querySelector(".dataEntry");
+          let y = document.querySelector(".addData")
+          let z = document.querySelector(".tableBody")
+          
+          if(z.style.display === "none"){
+            x.style.display ="none"
+            z.style.display = "inline-table";
+            y.style.display = "inline-block"
+            filter.style.display="block"
+          }
+          else {
+            z.style.display ="none";
+            filter.style.display="none"
+          }
+        } 
+        functionOne()
+
+        percentage()
+
+          
+        }
+// ----------------------------------FORM VALIDATIONS-------------------------------
+
+        function validateForm(){
+
+          let errorMessages = document.querySelector(".errorMessage")
+    
+      let r = parseInt(document.getElementById('maths').value)
+      let s = parseInt(document.getElementById('english').value)
+      let t = parseInt(document.getElementById('hindi').value)
+      if(isNaN(r) || isNaN(s) || isNaN(t) ||r>80 ||s>80 ||t>80 ||r<0||s<0||t<0){
+          errorMessages.innerHTML = "Invalid input"
+          return false;
+      }
+      return true;
+
+    }
+        // -----------------------------TitleCaseFunction--------------------------
+    function titleCase() {
+    let input = document.getElementById('name').value;
+    document.getElementById('name').value = input.charAt(0).toUpperCase() + input.slice(1).toLowerCase();
+}
+
+      // ---------------------------------Percentage-------------------------------
+function percentage(){
+  let maths = parseInt(document.getElementById('maths').value)
+  let english = parseInt(document.getElementById('english').value)
+  let hindi =  parseInt(document.getElementById('hindi').value)
+
+  let sum =  maths + hindi + english
+  console.log(sum)
+  let percent = sum/240*100
+  console.log(percent)
+  let integer = Math.round(percent)
+  console.log(integer)
+
+  
+  if (integer >= 95 && integer <= 100) {
+        grade = "A+"
+        grade.style.color = "green"
+    } else if (integer >= 90 && integer < 95) {
+        grade = "A"
+    } else if (integer >= 85 && integer < 90) {
+        grade = "B+"
+    } else if (integer >= 80 && integer < 85) {
+        grade = "B"
+    } else if (integer >= 75 && integer < 80) {
+        grade = "C+"
+    } else if (integer >= 70 && integer < 75) {
+        grade = "C"
+    } else if (integer >= 65 && integer < 70) {
+        grade = "D+"
+    } else if (integer >= 60 && integer < 65) {
+        grade = "D"
+    } else if (integer >= 55 && integer < 60) {
+        grade = "E+"
+    } else if (integer >= 50 && integer < 55) {
+        grade = "E"
+
+    }  else {
+    grade = "F";
+    grade.style.color="red"
+    // document.getElementById("grade").innerHTML = 'Grade <span style="color: red;">'  + grade + '</span>';
+}
+
+
+  document.getElementById("grade").value = grade;
+}
+
+// ---------------------------Topper Filter--------------------------------
+function filterTopper() {
+    var table = document.getElementById("dataTable");
+    var rows = table.getElementsByTagName("tr");
+
+    for (var i = 1; i < rows.length; i++) { 
+        var gradeElement = rows[i].getElementsByTagName("td")[5]; 
+        
+        if (gradeElement.innerHTML === "A+") {
+            rows[i].style.display = "table-row";
+            // gradeElement.style.color = "green";
+        } else {
+            rows[i].style.display = "none";
+        }
+
+        var reset = document.getElementById("noFilter")
+        if(reset.style.display==="none"){
+          reset.style.display="block";
+        }
+        else{
+          reset.style.display = "none";
+        }
+
+    }
+}
+
+// ----------------------------------LOOSER FILTER--------------------------------------
+function filterLoser() {
+    var table = document.getElementById("dataTable");
+    var rows = table.getElementsByTagName("tr");
+
+    for (var i = 1; i < rows.length; i++) { 
+        var gradeElement = rows[i].getElementsByTagName("td")[5];
+        
+        if (gradeElement.innerHTML === "F") {
+            rows[i].style.display = "table-row";
+            // gradeElement.style.color = "red"
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
+    var reset = document.getElementById("noFilter")
+        if(reset.style.display==="none"){
+          reset.style.display="block";
+        }
+        else{
+          reset.style.display = "none";
+        }
+}
+
+// -----------------------------BREAK-THE-DIFFERENCE FILTER-----------------------------
+
+function RemoveFilter(){
+  var table = document.getElementById("dataTable");
+    var rows = table.getElementsByTagName("tr");
+
+    for (var i = 1; i < rows.length; i++) { 
+        var gradeElement = rows[i].getElementsByTagName("td")[5]; 
+        
+        if (gradeElement.innerHTML === "F"||gradeElement.innerHTML === "E+"||gradeElement.innerHTML === "E"||gradeElement.innerHTML === "D+"||gradeElement.innerHTML === "D"||gradeElement.innerHTML === "C+"||gradeElement.innerHTML === "C"||gradeElement.innerHTML === "B+"||gradeElement.innerHTML === "B"||gradeElement.innerHTML === "A"||gradeElement.innerHTML === "A+") {
+            rows[i].style.display = "table-row";
+        } else {
+            rows[i].style.display = "none";
+        }
+    }
+    var reset = document.getElementById("noFilter")
+        if(reset.style.display==="none"){
+          reset.style.display="block";
+        }
+        else{
+          reset.style.display = "none";
+        }
+}
+
+
+
+
+    //  -----------------------------Display table data-----------------------------
+    
+    var counter =1;
+
+    function displayData(){
+        var name = document.getElementById('name').value
+        var maths = document.getElementById('maths').value
+        var hindi = document.getElementById('hindi').value
+        var english = document.getElementById('english').value
+        var grade = document.getElementById('grade').value
+ 
+        if (name === '' && maths === '' && hindi === '' && english === '' && grade === '') {
+          let z = document.querySelector(".tableBody")
+          z.style.display = "none";
+          document.write("No Data ")
+        return;
+    }
+       
+
+        var table = document.getElementById('dataTable');
+        var newRow = table.insertRow(-1);
+
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+        var cell5 = newRow.insertCell(4);
+        var cell6 = newRow.insertCell(5);
+
+     
+        cell1.innerHTML = counter;   
+        counter++;
+        cell2.innerHTML = name;
+        cell3.innerHTML = maths;
+        cell4.innerHTML = hindi;
+        cell5.innerHTML = english;
+        cell6.innerHTML = grade;
+
+    
+
+    }
+
+
+        
+    </script>
+</body>
+</html>

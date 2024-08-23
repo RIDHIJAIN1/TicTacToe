@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+function displayData() {
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+
+    var table = document.getElementById('dataTable');
+    var newRow = table.insertRow(table.rows.length);
+
+    var cell1 = newRow.insertCell(0);
+    var cell2 = newRow.insertCell(1);
+
+    cell1.innerHTML = name;
+    cell2.innerHTML = email;
+}
+</script>
+</head>
+<body>
+
+<form onsubmit="displayData(); return false;">
+  Name: <input type="text" id="name"><br><br>
+  Email: <input type="text" id="email"><br><br>
+  <input type="submit" value="Submit">
+</form>
+
+<table id="dataTable" border="1">
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+  </tr>
+</table>
+
+</body>
+</html>
